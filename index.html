@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Data Pollination: An Emergent Ecological Process Driving AI Population Evolution</title>
+  <meta name="description" content="ACL 2026: We argue that today's LLMs already form a de facto evolutionary ecosystem through data pollination, and show that population dynamics prevent the model collapse that defeats isolated single-model recursive training." />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Data Pollination — ACL 2026" />
+  <meta property="og:description" content="An emergent ecological process driving AI population evolution. Validated with 320 language models." />
+  <meta property="og:image" content="assets/env_v4.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<main class="page">
+
+  <!-- ============================== HEADER ============================== -->
+  <header class="hero">
+    <p class="venue">ACL 2026 &middot; Main Conference</p>
+    <h1 class="title">Data Pollination</h1>
+    <p class="subtitle">An Emergent Ecological Process Driving AI Population Evolution</p>
+
+    <p class="authors">
+      <span class="author"><strong>Shufang Xie</strong><sup>1,*</sup></span>
+      <span class="author"><strong>Qizhi Pei</strong><sup>1,*</sup></span>
+      <span class="author">Ang Lv<sup>1</sup></span>
+      <span class="author">Jingyang Hu<sup>1</sup></span>
+      <span class="author">Lijun Wu<sup>2</sup></span>
+      <span class="author"><strong>Rui Yan</strong><sup>3,&dagger;</sup></span>
+    </p>
+
+    <p class="affiliations">
+      <sup>1</sup>Gaoling School of AI, Renmin University of China &nbsp;&middot;&nbsp;
+      <sup>2</sup>Shanghai AI Laboratory &nbsp;&middot;&nbsp;
+      <sup>3</sup>School of AI, Wuhan University
+    </p>
+    <p class="affiliations small">
+      <sup>*</sup>Equal contribution &nbsp;&middot;&nbsp;
+      <sup>&dagger;</sup>Corresponding author:
+      <a href="mailto:rui.yan@whu.edu.cn">rui.yan@whu.edu.cn</a>
+    </p>
+
+    <!-- TODO: replace href="#" with real URLs once available -->
+    <nav class="buttons" aria-label="Resources">
+      <a class="btn" href="#" aria-label="Paper PDF">
+        <span class="btn-icon">📄</span> Paper
+      </a>
+      <a class="btn" href="#" aria-label="arXiv preprint">
+        <span class="btn-icon">📚</span> arXiv
+      </a>
+      <a class="btn" href="#" aria-label="Code repository">
+        <span class="btn-icon">💻</span> Code
+      </a>
+      <a class="btn" href="#bibtex" aria-label="BibTeX citation">
+        <span class="btn-icon">📑</span> BibTeX
+      </a>
+    </nav>
+  </header>
+
+  <!-- ============================== TEASER ============================== -->
+  <figure class="teaser">
+    <img src="assets/env_v4.png" alt="The data pollination cycle: deployed models populate the web with synthetic outputs, which are scraped to train the next generation of models." />
+    <figcaption>
+      <strong>The data-pollination cycle.</strong>
+      Deployed models populate the web with synthetic outputs. This content is scraped to train the next generation, creating an unmanaged evolutionary loop that transmits behavioural traits across model families.
+    </figcaption>
+  </figure>
+
+  <!-- ============================== TL;DR =============================== -->
+  <section class="tldr">
+    <h2 class="tldr-title">TL;DR</h2>
+    <p>
+      We argue that today's LLMs already form a <em>de facto evolutionary ecosystem</em>:
+      user choices and web crawling create unintentional inheritance pathways across
+      organizations &mdash; we call this <strong>data pollination</strong>. Formalizing
+      it as a population-based evolutionary process and validating with <strong>320
+      language models</strong>, we show that population dynamics <em>prevent the model
+      collapse</em> that recursive single-model training suffers, with
+      <strong>ecological diversity</strong> as the key resilience mechanism.
+    </p>
+  </section>
+
+  <!-- ============================== ABSTRACT ============================ -->
+  <section id="abstract">
+    <h2>Abstract</h2>
+    <p>
+      AI development is often framed as the outcome of isolated research and engineering
+      efforts, yet evidence from deployed systems suggests that language models interact
+      through a shared data ecosystem. While the optimization of individual models is
+      extensively studied, the emergent properties of this interconnected population
+      remain largely unexplored, limiting our ability to predict long-term ecosystem
+      trajectories.
+    </p>
+    <p>
+      We term this process <em>data pollination</em> &mdash; the unintentional circulation
+      of synthetic model outputs through shared online platforms and web-scale training
+      corpora &mdash; and formalize it as a population-based evolutionary framework to
+      investigate stability dynamics under synthetic data training. Our theoretical
+      analysis and controlled experiments involving 320 language models demonstrate that
+      population dynamics can mitigate the model collapse observed in single-lineage
+      recursive training, yielding stable or improving performance across diverse
+      benchmarks. Crucially, we find that ecological diversity functions as a fundamental
+      resilience mechanism that safeguards the ecosystem against collapse, highlighting
+      the critical importance of maintaining model diversity for sustainable AI development.
+    </p>
+  </section>
+
+  <!-- ============================== METHOD ============================== -->
+  <section id="method">
+    <h2>Method &mdash; A population-based evolutionary framework</h2>
+    <p>
+      We formalize data pollination as a population of <em>N</em> language models that
+      evolves through three operators abstracting deployed-ecosystem mechanics:
+    </p>
+    <ul>
+      <li><strong>Selection</strong> &mdash; a user-preference relation keeps the top
+        <em>k</em> = &radic;<em>N</em> models at each generation.</li>
+      <li><strong>Mutation</strong> &mdash; small parameter noise abstracts incremental
+        retraining, quantization, and configuration drift.</li>
+      <li><strong>Crossover &amp; data-mediated inheritance</strong> &mdash; offspring
+        inherit parameters from one parent and <em>train on the synthetic dataset</em>
+        of another, propagating behavioural traits through shared corpora rather than
+        weight checkpoints.</li>
+    </ul>
+    <figure>
+      <img src="assets/framework.png" alt="Population-based evolutionary framework diagram." />
+      <figcaption>
+        <strong>Population-based evolutionary framework.</strong> Selection &rarr; mutation
+        &rarr; crossover, where each model carries both its parameters and its synthetic
+        dataset, coupling the two lineages.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ============================== RESULTS ============================= -->
+  <section id="results">
+    <h2>Results</h2>
+
+    <h3>RQ1 &mdash; Cross-family convergence in 27 deployed models</h3>
+    <p>
+      Stylometric fingerprints of 27 deployed LLMs across 5 families show that within-
+      and cross-family similarity distributions are barely distinguishable
+      (Overlap Coefficient = <strong>0.313</strong>, Cliff's &delta; = &minus;0.572).
+      The asymmetry of directed influence over time rules out the
+      &ldquo;shared pre-training corpora&rdquo; null hypothesis: newer models echo older
+      models' fingerprints far more than the reverse &mdash; exactly the temporal
+      signature data pollination predicts.
+    </p>
+    <div class="figgrid two">
+      <figure>
+        <img src="assets/fig1a_distribution_overlap.png" alt="Density of within- vs. cross-family similarity." />
+        <figcaption>Within- vs.&nbsp;cross-family lexical-fingerprint similarity.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/fig1b_family_mixing_heatmap.png" alt="Row-normalized cross-family similarity matrix." />
+        <figcaption>Row-normalized cross-family similarity matrix.</figcaption>
+      </figure>
+    </div>
+    <figure>
+      <img src="assets/lag_influence_scatter_paper.png" alt="Directed influence vs. release-date lag." />
+      <figcaption>
+        <strong>Temporal asymmetry.</strong> Directed influence vs.&nbsp;release-date lag.
+        Positive lags dominate &rArr; causal flow older &rarr; newer.
+      </figcaption>
+    </figure>
+
+    <h3>RQ2 &mdash; Population dynamics prevent collapse (320 models)</h3>
+    <p>
+      In a strictly synthetic-only setting with 320 models across four populations of
+      <em>N</em>&nbsp;=&nbsp;16 over five generations, evolutionary populations stay stable
+      or improve on every benchmark, while single-lineage recursive baselines collapse as
+      classical theory predicts. On reasoning tasks like MMLU and MathQA the population
+      actually <em>gains</em> performance over generations.
+    </p>
+    <div class="figgrid two">
+      <figure>
+        <img src="assets/mmlu_boxplot.png" alt="MMLU performance over generations." />
+        <figcaption>MMLU</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/winogrande_boxplot.png" alt="WinoGrande performance over generations." />
+        <figcaption>WinoGrande</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/mathqa_boxplot.png" alt="MathQA performance over generations." />
+        <figcaption>MathQA</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/siqa_boxplot.png" alt="SIQA performance over generations." />
+        <figcaption>SIQA</figcaption>
+      </figure>
+    </div>
+
+    <p>
+      The qualitative trajectory tells the same story: population-based models stay
+      grammatical and on-topic through generation 4, while single recursive models drift
+      into URL-like, repetitive nonsense by generation 2.
+    </p>
+    <figure>
+      <img src="assets/table1_visual.png" alt="Side-by-side generation samples: population vs. single model across 5 generations." />
+      <figcaption>
+        Same fantasy prompt, 5 generations.
+        <strong>Left:</strong> evolutionary population stays coherent.
+        <strong>Right:</strong> single-model recursive training collapses into URL-like
+        repetition by generation&nbsp;2.
+      </figcaption>
+    </figure>
+
+    <h3>RQ3 &mdash; Why? Diversity as a resilience mechanism</h3>
+    <p>
+      For a population of <em>K</em> recursive Gaussian estimators, a Chernoff bound shows
+      that the probability of <em>every</em> estimator being bad decays exponentially in
+      <em>K</em>. Empirically, the population stays anchored to the ground truth even as
+      individual estimators drift far away. The same intuition explains the language-model
+      results: vary the population size and only <em>N</em>&nbsp;=&nbsp;16 yields stable
+      gains &mdash; a threshold effect mirroring biological resilience.
+    </p>
+    <div class="figgrid two">
+      <figure>
+        <img src="assets/evo_vs_baseline_single.png" alt="Gaussian estimation: population stays at the truth, single estimator drifts." />
+        <figcaption>1000-generation Gaussian simulation. Population (blue) stays anchored to the truth; single estimator (orange) drifts.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/abl_mmlu_violinplot.png" alt="MMLU performance by population size (N=4, 9, 16)." />
+        <figcaption>Population-size threshold: only <em>N</em>&nbsp;=&nbsp;16 sustains improvement.</figcaption>
+      </figure>
+    </div>
+    <figure>
+      <img src="assets/emb_vis_wino.png" alt="t-SNE of model completions across 5 generations." />
+      <figcaption>
+        <strong>Semantic diversity persists.</strong> t-SNE of model completions across
+        generations: prompt clusters and within-cluster spread both survive &mdash; the
+        population does not converge to a single output style.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ============================== TAKEAWAYS ============================ -->
+  <section id="takeaways">
+    <h2>Takeaways</h2>
+    <ul>
+      <li>Contemporary AI development is already a <strong>de facto evolutionary
+        ecosystem</strong> shaped by data pollination across organizations.</li>
+      <li>Population dynamics turn synthetic-data training from a collapse risk into
+        a <strong>collective correction mechanism</strong>.</li>
+      <li><strong>Ecological diversity</strong> &mdash; not just better individual
+        optimization &mdash; is a prerequisite for sustainable AI.</li>
+      <li>Treat <em>population structure</em> as a first-class design variable.</li>
+    </ul>
+  </section>
+
+  <!-- ============================== BIBTEX ============================== -->
+  <section id="bibtex">
+    <h2>BibTeX</h2>
+    <pre><code>@inproceedings{xie2026datapollination,
+  title     = {Data Pollination: An Emergent Ecological Process Driving AI Population Evolution},
+  author    = {Xie, Shufang and Pei, Qizhi and Lv, Ang and Hu, Jingyang
+               and Wu, Lijun and Yan, Rui},
+  booktitle = {Proceedings of the 64th Annual Meeting of the Association
+               for Computational Linguistics (ACL)},
+  year      = {2026}
+}</code></pre>
+  </section>
+
+  <!-- ============================== FOOTER ============================== -->
+  <footer>
+    <p>
+      &copy; 2026 the authors. &nbsp;
+      Page template: hand-written, MIT-licensed.
+    </p>
+  </footer>
+
+</main>
+
+</body>
+</html>
